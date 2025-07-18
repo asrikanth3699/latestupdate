@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="dc866a61-9e03-4899-907a-ddd46b5b3f37" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="sample_subflowFlow" doc:id="a64ed0ba-2e10-4f6e-8a9d-e4af901a37fa" >
+		<http:listener doc:name="Listener" doc:id="67836d97-6075-4f45-b422-461effe8756c" config-ref="HTTP_Listener_config" path="sample"/>
+		<logger level="INFO" doc:name="Logger" doc:id="3b352ede-ce1b-481f-adf9-b9c959aa5a67" message="flow start log"/>
+		<flow-ref doc:name="Flow Reference" doc:id="ac811bea-221f-479e-8b41-4a3db982d8fc" name="sample_subflowSub_Flow"/>
+		<logger level="INFO" doc:name="Logger" doc:id="4f082157-bff4-4e81-9b06-c223405fd225" message="flow end log"/>
+	</flow>
+	<sub-flow name="sample_subflowSub_Flow" doc:id="d992b662-1fff-43af-88b5-28d05a6296bb" >
+		<logger level="INFO" doc:name="Logger" doc:id="f9cd7bdf-1862-4f13-b996-1e751a43fcfc" message="sub flow start log"/>
+		<logger level="INFO" doc:name="Logger" doc:id="bce21188-352e-42cf-ab7e-7e22b6d1df58" message="sub flow end log"/>
+	</sub-flow>
+</mule>
